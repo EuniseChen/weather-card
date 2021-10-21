@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "微軟正黑體";
+      background-color: #76A0B7;
+
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+      height: 50px;
+      margin-bottom: 20px;
+      background-color: rgba(255, 255, 255, 0.4);
+      color: #065d70;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .all,
+    .north,
+    .middle,
+    .south,
+    .east,
+    .others {
+      width: 16.67%;
+      height: 50px;
+      text-align: center;
+      line-height: 50px;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .all {
+      background-color: #0A9ABC;
+    }
+
+    .north:hover,
+    .middle:hover,
+    .south:hover,
+    .east:hover,
+    .others:hover {
+      background-color: #0A9ABC
+    }
+
+
+    .content {
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      margin: 10px;
+      padding: 10px 10px;
+    }
+
+    .images {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      width: 45%;
+    }
+
+    .location-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 50px;
+      background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    .location {
+      left: 0;
+      width: 250px;
+      color: #0A9ABC;
+      text-align: center;
+    }
+
+    .weather,
+    .sense {
+      position: absolute;
+      top: 80px;
+      left: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      color: #0A9ABC;
+    }
+
+    .info {
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 250px;
+      height: 200px;
+      background-color: #EDF2F7;
+    }
+
+    .temperature {
+      position: absolute;
+      top: 40px;
+      left: 10px;
+      font-size: 25px;
+      font-weight: 900;
+      color: #0A9ABC;
+    }
+
+    .sense {
+      top: 150px;
+    }
+
+    :root {
+  --animate-duration: 3s;
+}
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="all">全部</div>
+    <div class="north">北部區域</div>
+    <div class="middle">中部區域</div>
+    <div class="south">南部區域</div>
+    <div class="east">東部</div>
+    <div class="others">其他</div>
+  </div>
+  <div class="content">
+
+  </div>
+
+  <script>
+    var content = document.querySelector('.content')
+
+
+
+    fetch('https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-B5282D9D-8FDD-40E9-AD48-B1DF3270465D')
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (weather) {
+        var location = weather.records.location
+        for (let i = 0; i < location.length; i++) {
+          // 降雨幾率<= 30%， 晴天（太陽圖）；30% <降雨幾率<= 60%，陰天（雲圖）；>60%, 雨天（雨圖）
+          if (location[i].weatherElement[1].time[0].parameter.parameterName <= 30) {
+            var weatherImg = './images/sunny.png'
+          } else if (location[i].weatherElement[1].time[0].parameter.parameterName <= 30) {
+            var weatherImg = './images/cloudy.png'
+          } else {
+            var weatherImg = './images/rainy.png'
+          }
+
+          content.innerHTML +=
+            `
+          <div class="card">
+            
+            <div class="location-container">
+              <h1 class="location">${location[i].locationName}</h1>
+            </div>
+            <div class="info">
+              <img src="${weatherImg}" alt="" class="images animate__animated animate__zoomIn">
+              <div class="weather">${location[i].weatherElement[0].time[0].parameter.parameterName}</div>
+              <div class="temperature">${location[i].weatherElement[2].time[0].parameter.parameterName}~${location[0].weatherElement[4].time[0].parameter.parameterName}℃</div>
+            </div>
+              <div class="sense">${location[i].weatherElement[3].time[0].parameter.parameterName}</div>
+        </div>
+        `
+        }
+
+      })
+
+  </script>
+</body>
+
+</html>
