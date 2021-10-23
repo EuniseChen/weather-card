@@ -1,0 +1,212 @@
+* {
+  margin    : 0;
+  padding   : 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family     : "微軟正黑體";
+  background-color: #76A0B7;
+
+}
+
+.nav {
+  display         : flex;
+  justify-content : space-evenly;
+  width           : 100%;
+  height          : 50px;
+  margin-bottom   : 20px;
+  background-color: rgba(255, 255, 255, 0.4);
+  color           : #065d70;
+  font-size       : 20px;
+  font-weight     : 600;
+  overflow        : hidden;
+}
+
+.all,
+.north,
+.middle,
+.south,
+.east,
+.others {
+  width           : 16.67%;
+  height          : 50px;
+  text-align      : center;
+  line-height     : 50px;
+  cursor          : pointer;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.all {
+  background-color: #0A9ABC;
+}
+
+.north:hover,
+.middle:hover,
+.south:hover,
+.east:hover,
+.others:hover {
+  transform       : scale(1.2);
+  background-color: #0A9ABC
+}
+
+
+.content {
+  display        : flex;
+  justify-content: space-evenly;
+  flex-wrap      : wrap;
+}
+
+.card {
+  position: relative;
+  width   : 250px;
+  height  : 250px;
+  margin  : 10px;
+  padding : 10px 10px;
+  cursor  : pointer;
+}
+
+.sun,
+.darkcloud {
+  position: absolute;
+  top     : 15%;
+  left    : 50%;
+  width   : 45%;
+}
+
+.rain {
+  position : absolute;
+  top      : 50%;
+  left     : 56%;
+  width    : 30%;
+  animation: rain 12s infinite linear;
+}
+
+.cloud-back {
+  position: absolute;
+  top     : 20%;
+  left    : 45%;
+  width   : 45%;
+}
+
+.cloud-front {
+  position: absolute;
+  top     : 35%;
+  left    : 56%;
+  width   : 40%;
+}
+
+.spin {
+  animation: spin 12s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.raindrop {
+  animation: raindrop 1s infinite linear;
+}
+
+@keyframes raindrop {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(10px, 20px);
+    opacity  : 0.3;
+  }
+}
+
+.cloud-left {
+  animation: cloud-left 10s infinite linear;
+}
+
+@keyframes cloud-left {
+  0% {}
+
+  50% {
+    transform: scale(1.2) translateX(-20px);
+  }
+
+  100% {}
+}
+
+.cloud-right {
+  animation: cloud-right 10s infinite linear;
+}
+
+@keyframes cloud-right {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.8) translateX(20px);
+    opacity  : 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+:root {
+  --animate-duration: 3s;
+}
+
+.location-container {
+  position        : absolute;
+  top             : 0;
+  left            : 0;
+  width           : 250px;
+  height          : 50px;
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.location {
+  left      : 0;
+  width     : 250px;
+  color     : #0A9ABC;
+  text-align: center;
+}
+
+.weather,
+.sense {
+  position   : absolute;
+  top        : 80px;
+  left       : 10px;
+  font-size  : 16px;
+  font-weight: 500;
+  color      : #0A9ABC;
+}
+
+.info {
+  position        : absolute;
+  top             : 50px;
+  left            : 0;
+  width           : 250px;
+  height          : 200px;
+  background-color: #EDF2F7;
+}
+
+.temperature {
+  position   : absolute;
+  top        : 40px;
+  left       : 10px;
+  font-size  : 25px;
+  font-weight: 900;
+  color      : #0A9ABC;
+}
+
+.sense {
+  top: 150px;
+}
