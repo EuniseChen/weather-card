@@ -210,3 +210,11 @@ body {
 .sense {
   top: 150px;
 }
+
+.show {
+  opacity: 1;
+}
+
+.disappear {
+  opacity: 0;
+}
